@@ -201,6 +201,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
                     ),
                   ),
                 ),
+                
               ),
             ],
           ),
