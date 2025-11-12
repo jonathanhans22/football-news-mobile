@@ -1,63 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:football_news/screens/menu.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
-/// Flutter code sample for [Form].
-
-void main() => runApp(const FormExampleApp());
-
-class FormExampleApp extends StatelessWidget {
-  const FormExampleApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Form Sample')),
-        body: const FormExample(),
-      ),
-    );
-  }
+void main() {
+  runApp(const MyApp());
 }
 
-class FormExample extends StatefulWidget {
-  const FormExample({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  @override
-  State<FormExample> createState() => _FormExampleState();
-}
-
-class _FormExampleState extends State<FormExample> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(hintText: 'Enter your email'),
-            validator: (String? value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
-                if (_formKey.currentState!.validate()) {
-                  // Process data.
-                }
-              },
-              child: const Text('Submit'),
-            ),
-          ),
-        ],
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+        title: 'Football News',
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // TRY THIS: Try running your application with "flutter run". You'll see
+          // the application has a purple toolbar. Then, without quitting the app,
+          // try changing the seedColor in the colorScheme below to Colors.green
+          // and then invoke "hot reload" (save your changes or press the "hot
+          // reload" button in a Flutter-supported IDE, or press "r" if you used
+          // the command line to start the app).
+          //
+          // Notice that the counter didn't reset back to zero; the application
+          // state is not lost during the reload. To reset the state, use hot
+          // restart instead.
+          //
+          // This works for code too, not just values: Most code changes can be
+          // tested with just a hot reload.
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+          .copyWith(secondary: Colors.blueAccent[400]),
+        ),
+        home: MyHomePage(),
       ),
     );
   }
